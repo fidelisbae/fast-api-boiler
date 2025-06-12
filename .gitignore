@@ -1,0 +1,5 @@
+__pycache__/
+mosquitto/data
+mosquitto/log
+venv
+.env

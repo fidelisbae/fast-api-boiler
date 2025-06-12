@@ -1,0 +1,12 @@
+fastapi==0.110.0
+uvicorn==0.27.1
+pydantic==2.11.5
+pydantic-settings==2.9.1
+python-dotenv==1.1.0
+paho-mqtt==1.6.1
+influxdb-client==1.38.0
+sqlalchemy==2.0.28
+mysqlclient==2.2.4
+pymysql>=1.0.2
+alembic==1.13.1
+cryptography>=42.0.0
