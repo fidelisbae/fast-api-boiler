@@ -23,23 +23,29 @@ services:
     volumes:
       - influxdb_data:/var/lib/influxdb2
     environment:
-      - DOCKER_INFLUXDB_INIT_MODE=${INFLUXDB_INIT_MODE}
-      - DOCKER_INFLUXDB_INIT_USERNAME=${INFLUXDB_INIT_USERNAME}
-      - DOCKER_INFLUXDB_INIT_PASSWORD=${INFLUXDB_INIT_PASSWORD}
-      - DOCKER_INFLUXDB_INIT_ORG=${INFLUXDB_INIT_ORG}
-      - DOCKER_INFLUXDB_INIT_BUCKET=${INFLUXDB_INIT_BUCKET}
-      - DOCKER_INFLUXDB_INIT_ADMIN_TOKEN=${INFLUXDB_INIT_ADMIN_TOKEN}
+      - DOCKER_INFLUXDB_INIT_MODE=${INFLUXDB_MODE}
+      - DOCKER_INFLUXDB_INIT_USERNAME=${INFLUXDB_USERNAME}
+      - DOCKER_INFLUXDB_INIT_PASSWORD=${INFLUXDB_PASSWORD}  
+      - DOCKER_INFLUXDB_INIT_ORG=${INFLUXDB_ORG}
+      - DOCKER_INFLUXDB_INIT_BUCKET=${INFLUXDB_BUCKET}
+      - DOCKER_INFLUXDB_INIT_ADMIN_TOKEN=${INFLUXDB_ADMIN_TOKEN}
 
   mosquitto:
     image: eclipse-mosquitto:2.0
     container_name: mosquitto
     restart: always
     ports:
-      - "1884:1884"
+      - "${MOSQUITTO_PORT}:${MOSQUITTO_PORT}"
     volumes:
       - ./mosquitto/config:/mosquitto/config
       - ./mosquitto/data:/mosquitto/data
       - ./mosquitto/log:/mosquitto/log
+    command: >
+      /bin/sh -c "
+      touch /mosquitto/config/passwd &&
+      mosquitto_passwd -b /mosquitto/config/passwd ${MOSQUITTO_USERNAME} ${MOSQUITTO_PASSWORD} &&
+      mosquitto -c /mosquitto/config/mosquitto.conf
+      "
 
 volumes:
   mysql_data:

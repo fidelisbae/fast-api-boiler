@@ -1,0 +1,16 @@
+{
+    "cSpell.words": [
+        "dotenv",
+        "fastapi",
+        "mosquitto",
+        "mqtt",
+        "mysqlclient",
+        "paho",
+        "pycache",
+        "pydantic",
+        "sqlalchemy",
+        "thermoping",
+        "uvicorn",
+        "venv"
+    ]
+}
